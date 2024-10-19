@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Narrador1
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: ae47dbd5-a931-4068-b132-6286c6294054
+    PortName: Next
+    TargetNodeGUID: dd6e7b8d-b79a-4b0b-aeed-e6bd0abb7619
+  - BaseNodeGUID: dd6e7b8d-b79a-4b0b-aeed-e6bd0abb7619
+    PortName: Continuar
+    TargetNodeGUID: db1f1899-7bca-45e9-a23b-f629d85b0b8f
+  DialogueNodeData:
+  - NodeGUID: db1f1899-7bca-45e9-a23b-f629d85b0b8f
+    DialogueText: Has caminado incontables pasos por este laberinto de hielo y acero.
+    Position: {x: 834, y: 200}
+  - NodeGUID: dd6e7b8d-b79a-4b0b-aeed-e6bd0abb7619
+    DialogueText: Sigues las instrucciones de tu traje.
+    Position: {x: 365, y: 200}
+  ExposedProperties: []
+  CommentBlockData: []
