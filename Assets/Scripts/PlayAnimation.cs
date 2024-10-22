@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,10 @@ using UnityEngine.Events;
 
 public class Playanimation : MonoBehaviour
 {
-    public UnityEvent evento;
+    public Animator animacion;
     
     void Start()
     {
-        evento.Invoke();
+        animacion.SetTrigger("Play");
     }
 }

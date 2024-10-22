@@ -6,19 +6,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Subtegral.DialogueSystem.DataContainers;
+using UnityEngine.Events;
 
 namespace Subtegral.DialogueSystem.Runtime
 {
     public class DialogueManager : MonoBehaviour
     {
-        [SerializeField] private List<DialogueContainer> narratives; // List to hold multiple narratives
+        [SerializeField] private List<DialogueContainer> narratives;
         [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private Button choicePrefab;
         [SerializeField] private Transform buttonContainer;
-        [SerializeField] private Button nextNarrativeButton; // Button to go to next narrative
+        [SerializeField] private Button nextNarrativeButton;
+        [SerializeField] private UnityEvent onNarrativeSequenceComplete;
 
-        private int currentNarrativeIndex = 0; // Track the current narrative
-        private bool narrativeEnded = false;   // Flag to check if current narrative ended
+        private int currentNarrativeIndex = 0;
 
         private void Start()
         {
@@ -29,42 +30,36 @@ namespace Subtegral.DialogueSystem.Runtime
         {
             if (narrativeIndex < narratives.Count)
             {
-                var narrativeData = narratives[narrativeIndex].NodeLinks.First(); // Entrypoint node
+                var narrativeData = narratives[narrativeIndex].NodeLinks.First();
                 ProceedToNarrative(narrativeData.TargetNodeGUID);
             }
         }
 
         private void ProceedToNarrative(string narrativeDataGUID)
         {
-            var dialogue = narratives[currentNarrativeIndex]; // Get the current narrative
+            var dialogue = narratives[currentNarrativeIndex];
             var text = dialogue.DialogueNodeData.Find(x => x.NodeGUID == narrativeDataGUID).DialogueText;
             var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGUID == narrativeDataGUID);
             
-            // Update dialogue text
             dialogueText.text = ProcessProperties(text);
 
-            // Destroy old buttons
             var buttons = buttonContainer.GetComponentsInChildren<Button>();
             for (int i = 0; i < buttons.Length; i++)
             {
                 Destroy(buttons[i].gameObject);
             }
 
-            // If there are choices, create buttons for them
             if (choices.Any())
             {
-                narrativeEnded = false;
                 foreach (var choice in choices)
                 {
                     var button = Instantiate(choicePrefab, buttonContainer);
-                    button.GetComponentInChildren<Text>().text = ProcessProperties(choice.PortName);
+                    //button.GetComponentInChildren<Text>().text = ProcessProperties(choice.PortName);
                     button.onClick.AddListener(() => ProceedToNarrative(choice.TargetNodeGUID));
                 }
             }
             else
             {
-                // No choices means this is the end of the current narrative
-                narrativeEnded = true;
                 ShowNextNarrativeButton();
             }
         }
@@ -72,21 +67,26 @@ namespace Subtegral.DialogueSystem.Runtime
         private void ShowNextNarrativeButton()
         {
             nextNarrativeButton.gameObject.SetActive(true);
-            nextNarrativeButton.onClick.RemoveAllListeners(); // Remove previous listeners
+            nextNarrativeButton.onClick.RemoveAllListeners();
             nextNarrativeButton.onClick.AddListener(() =>
             {
-                nextNarrativeButton.gameObject.SetActive(false); // Hide button when clicked
-                currentNarrativeIndex++; // Move to next narrative
+                nextNarrativeButton.gameObject.SetActive(false);
+                currentNarrativeIndex++;
                 if (currentNarrativeIndex < narratives.Count)
                 {
-                    StartNarrative(currentNarrativeIndex); // Start the next narrative
+                    StartNarrative(currentNarrativeIndex);
+                }
+                else
+                {
+                    Debug.Log("Entra");
+                    onNarrativeSequenceComplete?.Invoke();
                 }
             });
         }
 
         private string ProcessProperties(string text)
         {
-            var dialogue = narratives[currentNarrativeIndex]; // Get the current narrative's properties
+            var dialogue = narratives[currentNarrativeIndex];
             foreach (var exposedProperty in dialogue.ExposedProperties)
             {
                 text = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
