@@ -1,1 +1,0 @@
-Hola. Estaba buscando una cosa para mi mamá. Pero llevo mucho tiempo fuera.
