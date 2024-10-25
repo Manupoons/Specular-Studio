@@ -268,8 +268,8 @@ namespace DialogueEditor
                     m_selectedOption = null;
                     break;
                 case eState.TransitioningDialogueBoxOn:
-                    SetColorAlpha(DialogueBackground, 1);
-                    SetColorAlpha(NameText, 1);
+                    SetColorAlpha(DialogueBackground, 0.8f);
+                    SetColorAlpha(NameText, 0.8f);
                     break;
             }
 
@@ -291,13 +291,13 @@ namespace DialogueEditor
 
                 case eState.ScrollingText:
                     {
-                        SetColorAlpha(DialogueText, 1);
+                        SetColorAlpha(DialogueText, 0.8f);
                     }
                     break;
 
                 case eState.TransitioningOptionsOn:
                     {
-                        SetColorAlpha(DialogueText, 1);
+                        SetColorAlpha(DialogueText, 0.8f);
 
                         CreateUIOptions();
 
@@ -360,7 +360,7 @@ namespace DialogueEditor
             m_stateTime += Time.deltaTime;
             float t = m_stateTime / TRANSITION_TIME;
 
-            if (t > 1)
+            if (t > 0.8f)
             {
                 SetState(eState.Idle);
                 return;
@@ -421,9 +421,9 @@ namespace DialogueEditor
 
 
             for (int i = 0; i < m_uiOptions.Count; i++)
-                m_uiOptions[i].SetAlpha(1 - t);
+                m_uiOptions[i].SetAlpha(0.8f - t);
 
-            SetColorAlpha(DialogueText, 1 - t);
+            SetColorAlpha(DialogueText, 0.8f - t);
         }
 
         private void TransitioningDialogueBoxOff_Update()
@@ -437,8 +437,8 @@ namespace DialogueEditor
                 return;
             }
 
-            SetColorAlpha(DialogueBackground, 1 - t);
-            SetColorAlpha(NameText, 1 - t);
+            SetColorAlpha(DialogueBackground, 0.8f - t);
+            SetColorAlpha(NameText, 0.8f - t);
         }
 
 
@@ -659,12 +659,24 @@ namespace DialogueEditor
                     if (m_currentSpeech.ConnectionType == Connection.eConnectionType.Speech)
                     {
                         UIConversationButton uiOption = CreateButton();
+                        Color colorBoton = Color.clear;
+                        var colors = uiOption.GetComponent<Button>().colors;
+                        var imageBoton = uiOption.GetComponent<Image>().color;
+                        imageBoton.a = 0f;
+                        //Destroy(uiOption.GetComponent<Image>());
+                        colors.disabledColor = colorBoton;
+                        colors.highlightedColor = colorBoton;
+                        colors.normalColor = colorBoton;
+                        colors.pressedColor = colorBoton;
+                        colors.selectedColor = colorBoton;
+                        uiOption.GetComponent<RectTransform>().sizeDelta = new Vector2(5000, 10000);
+                        uiOption.GetComponent<RectTransform>().position = new Vector2(0, 100);
                         SpeechNode next = GetValidSpeechOfNode(m_currentSpeech);
 
                         // If there was no valid speech node (due to no conditions being met) this becomes a None button type
                         if (next == null)
                         {
-                            uiOption.SetupButton(UIConversationButton.eButtonType.End, null, endFont: m_conversation.EndConversationFont);
+                            //uiOption.SetupButton(UIConversationButton.eButtonType.End, null, endFont: m_conversation.EndConversationFont);
                         }
                         // Else, valid speech node found
                         else
@@ -673,11 +685,11 @@ namespace DialogueEditor
                         }
                         
                     }
-                    else if (m_currentSpeech.ConnectionType == Connection.eConnectionType.None)
+                    /*else if (m_currentSpeech.ConnectionType == Connection.eConnectionType.None)
                     {
                         UIConversationButton uiOption = CreateButton();
                         uiOption.SetupButton(UIConversationButton.eButtonType.End, null, endFont: m_conversation.EndConversationFont);
-                    }
+                    }*/
                 }
 
             }

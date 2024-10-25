@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb3bdeff70ac444caceddcd459d01bf, type: 3}
+  m_Name: ObetenerSuero
+  m_EditorClassIdentifier: 
+  Title: Obtener el suero
+  Description: Has conseguido el suero
+  Sprite: {fileID: 0}
+  AmountToCheck: {fileID: 11400000, guid: 18bbc9d7cf20c844ca7cd6ce9b6ad7d7, type: 2}
+  TargetAmount: 0
+  Earned: 0
