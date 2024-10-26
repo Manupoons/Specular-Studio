@@ -15,21 +15,4 @@ public class DialogueManager : MonoBehaviour
     {
         dialog?.Invoke();
     }
-
-    private void Update()
-    {
-        if (ConversationManager.Instance != null)
-        {
-            UpdateConversationInput();
-        }
-    }
-
-    private void UpdateConversationInput()
-    {
-        if (ConversationManager.Instance.IsConversationActive)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-                ConversationManager.Instance.SelectPreviousOption();
-        }
-    }
 }
