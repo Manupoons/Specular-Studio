@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d42783a0713bb42b2cd119cf0a769d, type: 3}
   m_Name: Suero
   m_EditorClassIdentifier: 
-  Value: 1
+  Value: 0

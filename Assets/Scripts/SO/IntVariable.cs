@@ -6,10 +6,31 @@ using UnityEngine;
 
 public class IntVariable : ScriptableObject
 {
-    public int Value;
-    
+    private string playerPrefsKey;
+
+    public int Value
+    {
+        get => PlayerPrefs.GetInt(playerPrefsKey, 0);
+        set
+        {
+            PlayerPrefs.SetInt(playerPrefsKey, value);
+            PlayerPrefs.Save(); // Ensures the value is written immediately
+        }
+    }
+
+    private void OnEnable()
+    {
+        // Set a unique key based on the object name to avoid conflicts
+        playerPrefsKey = $"IntVariable_{name}";
+    }
+
     public void IncreaseValue()
     {
-        Value++;
+        Value++; // This will automatically update PlayerPrefs
+    }
+
+    public void SetZero()
+    {
+        Value = 0;
     }
 }
