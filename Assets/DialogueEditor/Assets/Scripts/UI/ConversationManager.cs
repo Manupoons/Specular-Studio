@@ -80,7 +80,6 @@ namespace DialogueEditor
         private List<UIConversationButton> m_uiOptions;
         private int m_currentSelectedIndex;
 
-
         //--------------------------------------
         // Awake, Start, Destroy, Update
         //--------------------------------------
@@ -134,9 +133,7 @@ namespace DialogueEditor
                     break;
             }
         }
-
-
-
+        
         //--------------------------------------
         // Public functions
         //--------------------------------------
@@ -254,7 +251,6 @@ namespace DialogueEditor
             return value;
         }
 
-
         //--------------------------------------
         // Set state
         //--------------------------------------
@@ -309,9 +305,6 @@ namespace DialogueEditor
                     break;
             }
         }
-
-
-
 
         //--------------------------------------
         // Update
@@ -440,10 +433,7 @@ namespace DialogueEditor
             SetColorAlpha(DialogueBackground, 0.8f - t);
             SetColorAlpha(NameText, 0.8f - t);
         }
-
-
-
-
+        
         //--------------------------------------
         // Do Speech
         //--------------------------------------
@@ -532,10 +522,7 @@ namespace DialogueEditor
                 SetState(eState.TransitioningOptionsOn);
             }            
         }
-
-
-
-
+        
         //--------------------------------------
         // Option Selected
         //--------------------------------------
@@ -559,9 +546,6 @@ namespace DialogueEditor
             m_selectedOption = null;
             SetState(eState.TransitioningOptionsOff);
         }
-
-
-
 
         //--------------------------------------
         // Util
@@ -592,7 +576,6 @@ namespace DialogueEditor
             if (parentNode.ConnectionType != Connection.eConnectionType.Speech) { return null; }
             if (parentNode.Connections.Count == 0) { return null; }
 
-            // Loop through connections, until a valid connection is found.
             for (int i = 0; i < parentNode.Connections.Count; i++)
             {
                 SpeechConnection connection = parentNode.Connections[i] as SpeechConnection;
@@ -663,7 +646,6 @@ namespace DialogueEditor
                         var colors = uiOption.GetComponent<Button>().colors;
                         var imageBoton = uiOption.GetComponent<Image>().color;
                         imageBoton.a = 0f;
-                        //Destroy(uiOption.GetComponent<Image>());
                         colors.disabledColor = colorBoton;
                         colors.highlightedColor = colorBoton;
                         colors.normalColor = colorBoton;
@@ -673,29 +655,21 @@ namespace DialogueEditor
                         uiOption.GetComponent<RectTransform>().position = new Vector2(0, 100);
                         SpeechNode next = GetValidSpeechOfNode(m_currentSpeech);
 
-                        // If there was no valid speech node (due to no conditions being met) this becomes a None button type
                         if (next == null)
                         {
                             //uiOption.SetupButton(UIConversationButton.eButtonType.End, null, endFont: m_conversation.EndConversationFont);
                         }
-                        // Else, valid speech node found
                         else
                         {
                             uiOption.SetupButton(UIConversationButton.eButtonType.Speech, next, continueFont: m_conversation.ContinueFont);
                         }
                         
                     }
-                    /*else if (m_currentSpeech.ConnectionType == Connection.eConnectionType.None)
-                    {
-                        UIConversationButton uiOption = CreateButton();
-                        uiOption.SetupButton(UIConversationButton.eButtonType.End, null, endFont: m_conversation.EndConversationFont);
-                    }*/
                 }
 
             }
             SetSelectedOption(0);
 
-            // Set the button sprite and alpha
             for (int i = 0; i < m_uiOptions.Count; i++)
             {
                 m_uiOptions[i].SetImage(OptionImage, OptionImageSliced);

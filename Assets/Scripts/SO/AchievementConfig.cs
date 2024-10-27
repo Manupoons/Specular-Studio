@@ -9,6 +9,7 @@ public class AchievementConfig : MonoBehaviour
     public Image Icon;
     public TextMeshProUGUI Title;
     public TextMeshProUGUI Description;
+    
     public void ConfigAchievement(AchievementSO achievement)
     {
         Icon.sprite = achievement.Sprite;

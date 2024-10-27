@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebb3bdeff70ac444caceddcd459d01bf, type: 3}
-  m_Name: ObetenerSuero
+  m_Name: ObtenerSuero
   m_EditorClassIdentifier: 
-  Title: Obtener el suero
-  Description: Has conseguido el suero
-  Sprite: {fileID: 0}
-  AmountToCheck: {fileID: 11400000, guid: 18bbc9d7cf20c844ca7cd6ce9b6ad7d7, type: 2}
-  TargetAmount: 0
+  Title: Suero
+  Description: "Obt\xE9n el suero"
+  Sprite: {fileID: 21300000, guid: 5e4f8b6d60fe47942b52dfd0d5096323, type: 3}
   Earned: 0

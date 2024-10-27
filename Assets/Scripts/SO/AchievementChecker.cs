@@ -11,10 +11,5 @@ public class AchievementChecker : MonoBehaviour
 
     public void Check()
     {
-        if (achievement.AmountToCheck.Value == achievement.TargetAmount)
-        {
-            achievement.Earned = true;
-            AchievementEarned?.Invoke();
-        }
     } 
 }

@@ -9,12 +9,25 @@ public class AchievementSO : ScriptableObject
 {
     public String Title;
     public String Description;
-
     public Sprite Sprite;
 
-    public IntVariable AmountToCheck;
+    private const string EarnedKeyPrefix = "AchievementEarned_";
 
-    public int TargetAmount;
+    public bool Earned
+    {
+        get => PlayerPrefs.GetInt(EarnedKeyPrefix + name, 0) == 1;
+        private set
+        {
+            PlayerPrefs.SetInt(EarnedKeyPrefix + name, value ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+    }
 
-    public bool Earned;
+    public void EarnAchievement()
+    {
+        if (!Earned)
+        {
+            Earned = true;
+        }
+    }
 }

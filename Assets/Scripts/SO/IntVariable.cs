@@ -14,19 +14,18 @@ public class IntVariable : ScriptableObject
         set
         {
             PlayerPrefs.SetInt(playerPrefsKey, value);
-            PlayerPrefs.Save(); // Ensures the value is written immediately
+            PlayerPrefs.Save();
         }
     }
 
     private void OnEnable()
     {
-        // Set a unique key based on the object name to avoid conflicts
         playerPrefsKey = $"IntVariable_{name}";
     }
 
     public void IncreaseValue()
     {
-        Value++; // This will automatically update PlayerPrefs
+        Value++;
     }
 
     public void SetZero()

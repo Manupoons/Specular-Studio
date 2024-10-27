@@ -44,7 +44,6 @@ namespace DialogueEditor
         public abstract Color DefaultColor { get; }
         public abstract Color SelectedColor { get; }
 
-
         //---------------------------------
         // Constructor 
         //---------------------------------
@@ -86,9 +85,6 @@ namespace DialogueEditor
             Info.EditorInfo.xPos = centeredPos.x;
             Info.EditorInfo.yPos = centeredPos.y;
         }
-
-
-
 
         //---------------------------------
         // Drawing
@@ -167,7 +163,6 @@ namespace DialogueEditor
             }
         }
 
-
         //---------------------------------
         // Interactions / Input Events
         //---------------------------------
@@ -233,9 +228,6 @@ namespace DialogueEditor
             return false;
         }
 
-
-
-
         //---------------------------------
         // Inhereted, shared behaviour
         //---------------------------------
@@ -255,8 +247,6 @@ namespace DialogueEditor
             OnUINodeDeleted?.Invoke(this);
         }
 
-
-
         //---------------------------------
         // Abstract methods
         //---------------------------------
@@ -265,8 +255,6 @@ namespace DialogueEditor
         protected abstract void ProcessContextMenu();
         protected abstract void OnSetSelected(bool selected);
     }
-
-
 
     //--------------------------------------
     // Speech Node
@@ -295,7 +283,6 @@ namespace DialogueEditor
         protected static GUIStyle selectedNodeStyle;
 
         protected static GUIStyle npcNameStyle;
-
 
         //---------------------------------
         // Constructor
@@ -328,8 +315,6 @@ namespace DialogueEditor
             CreateRect(pos, Width, Height);
         }
 
-
-
         //---------------------------------
         // Drawing
         //---------------------------------
@@ -355,9 +340,6 @@ namespace DialogueEditor
             DrawInternalText(SpeechNode.Text, SPRITE_SZ + 5, NAME_HEIGHT + NAME_PADDING);
         }
 
-
-
-
         //---------------------------------
         // Interactions
         //---------------------------------
@@ -369,9 +351,6 @@ namespace DialogueEditor
             else
                 currentBoxStyle = defaultNodeStyle;
         }
-
-
-
 
         //---------------------------------
         // Right clicked
@@ -392,10 +371,7 @@ namespace DialogueEditor
             OnCreateOption?.Invoke(this);
         }
     }
-
-
-
-
+    
     //--------------------------------------
     // OptionNode
     //--------------------------------------
@@ -437,10 +413,7 @@ namespace DialogueEditor
 
             CreateRect(pos, Width, Height);
         }
-
-
-
-
+        
         //---------------------------------
         // Drawing
         //---------------------------------
@@ -450,9 +423,6 @@ namespace DialogueEditor
             DrawTitle( isSelected ? "Option node (selected)." : "Option node.");
             DrawInternalText(OptionNode.Text);
         }
-
-
-
 
         //---------------------------------
         // Interactions
@@ -465,9 +435,6 @@ namespace DialogueEditor
             else
                 currentBoxStyle = defaultNodeStyle;
         }
-
-
-
 
         //---------------------------------
         // Right clicked

@@ -38,7 +38,6 @@ namespace DialogueEditor
         private bool Hovering { get { return (m_hoverState == eHoverState.animatingOn || m_hoverState == eHoverState.animatingOff); } }
         private Vector3 BigSize { get { return Vector3.one * 1.1f; } }
 
-
         //--------------------------------------
         // MonoBehaviour
         //--------------------------------------
@@ -83,9 +82,6 @@ namespace DialogueEditor
             }
         }
 
-
-
-
         //--------------------------------------
         // Input Events
         //--------------------------------------
@@ -115,10 +111,7 @@ namespace DialogueEditor
         {
             DoClickBehaviour();
         }
-
-
-
-
+        
         //--------------------------------------
         // Public calls
         //--------------------------------------
@@ -200,10 +193,7 @@ namespace DialogueEditor
                     break;
             }
         }
-
-
-
-
+        
         //--------------------------------------
         // Private logic
         //--------------------------------------
@@ -225,9 +215,6 @@ namespace DialogueEditor
                     break;
             }
         }
-
-
-
 
         //--------------------------------------
         // Util
